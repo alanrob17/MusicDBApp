@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="MusicDAL/MusicDAL.csproj" />
+  <Project Path="MusicDB/MusicDB.csproj" />
+  <Project Path="MusicDBTest/MusicDBTest.csproj" />
+</Solution>
