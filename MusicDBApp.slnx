@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="MusicDAL/MusicDAL.csproj" />
-  <Project Path="MusicDB/MusicDB.csproj" />
-  <Project Path="MusicDBTest/MusicDBTest.csproj" />
+  <Project Path="MusicDAL/MusicDAL.csproj" Id="4fbf228b-ea23-47c2-9d10-ca2cca37e63f" />
+  <Project Path="MusicDB/MusicDB.csproj" Id="06722ebc-d3f7-461a-92f7-37a7b23f62ed" />
+  <Project Path="MusicDBTest/MusicDBTest.csproj" Id="204b16b7-0139-4802-9160-037eb949e87e" />
 </Solution>

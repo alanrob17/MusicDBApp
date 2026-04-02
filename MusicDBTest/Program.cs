@@ -13,13 +13,13 @@ namespace MusicDBTest
     public class Program
     {
         private static readonly ArtistRepository _ar;
-        // private static readonly RecordRepository _rr;
+        private static readonly RecordRepository _rr;
 
         static Program()
         {
             var db = new DataAccess();
             _ar = new ArtistRepository(db);
-            // _rr = new RecordRepository(db);
+            _rr = new RecordRepository(db);
         }
 
         public static async Task Main(string[] args)
@@ -46,7 +46,8 @@ namespace MusicDBTest
             // await Update2Async();
             // await DeleteArtistAsync();
 
-            // await GetRecordAsync();
+            await GetRecordAsync();
+            await GetRecord2Async();
             // await CountDiscsAsync();
             // await GetArtistRecordNumberAsync();
             // await GetFormattedRecordAsync();
@@ -293,18 +294,24 @@ namespace MusicDBTest
         //    Console.WriteLine($"Count: {count} CD's");
         //}
 
-        //private static async Task GetRecordAsync()
-        //{
-        //    var recordId = 1135;
+        private static async Task GetRecordAsync()
+        {
+            var recordId = 154;
 
-        //    var artist = await _ar.GetArtistByRecordIdAsync(recordId);
-        //    // var biography = await _ar.GetBiographyAsync(recordId); // not needed
-        //    var record = await _rr.SelectAsync(recordId);
+            var artist = await _ar.GetArtistByRecordIdAsync(recordId);
+            // var biography = await _ar.GetBiographyAsync(recordId); // not needed
+            var record = await _rr.SelectAsync(recordId);
 
-        //    Console.WriteLine($"\n{artist.ArtistId}: - Artist {artist.Name}:\n");
+            Console.WriteLine($"\n{artist.ArtistId}: - Artist {artist.Name}:\n");
 
-        //    Console.WriteLine($"\nRecordId: {record.RecordId}\nName: {record.Name}\nField: {record.Field}\nRecorded: {record.Recorded}\nLabel: {record.Label}\nPressing: {record.Pressing}\nDiscs: {record.Discs}\nMedia: {record.Media}\nBought: {record.Bought.ToShortDateString()}\nCost: ${record.Cost}\nReview:\n{record.Review}\n\nBiography:\n{artist.Biography}");
-        //}
+            Console.WriteLine($"\nRecordId: {record.RecordId}\nName: {record.Name}\nField: {record.Field}\nRecorded: {record.Recorded}\nLength: {record.Length}\nDiscs: {record.Discs}\nReview:\n{record.Review}\n\nBiography:\n{artist.Biography}");
+        }
+
+        private static async Task GetRecord2Async()
+        {
+            // up_GetArtistRecordById
+        }
+
 
         private static async Task GetBiographyAsync()
         {
