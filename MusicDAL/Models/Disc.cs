@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MusicDAL.Models
 {
-    public class Disk
+    public class Disc
     {
         #region " Properties "
 

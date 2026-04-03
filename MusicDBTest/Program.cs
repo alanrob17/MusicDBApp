@@ -46,7 +46,7 @@ namespace MusicDBTest
             // await Update2Async();
             // await DeleteArtistAsync();
 
-            await GetRecordAsync();
+            // await GetRecordAsync();
             await GetRecord2Async();
             // await CountDiscsAsync();
             // await GetArtistRecordNumberAsync();
@@ -309,7 +309,14 @@ namespace MusicDBTest
 
         private static async Task GetRecord2Async()
         {
-            // up_GetArtistRecordById
+            // 
+            var recordId = 154;
+
+            var album = await _rr.GetArtisRecordAsync(recordId);
+
+            Console.WriteLine($"\n{album.ArtistId}: - Artist {album.ArtistName}:");
+
+            Console.WriteLine($"\nRecordId: {album.RecordId}\nName: {album.Name}\nField: {album.Field}\nRecorded: {album.Recorded}\nLength: {album.Length}\nDiscs: {album.Discs}\nReview:\n{album.Review}\n");
         }
 
 

@@ -2,6 +2,7 @@
 using Heinemann.Components;
 using MusicDAL.Data;
 using MusicDAL.Models;
+using MusicDAL.Models.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -315,5 +316,15 @@ namespace MusicDAL.Repository
             }
         }
 
+        public async Task<ArtistRecordDto> GetArtisRecordAsync(int recordId)
+        {
+            string sproc = "up_GetArtistRecordDetails";
+            var parameter = new DynamicParameters();
+            parameter.Add("@RecordId", recordId);
+
+            var album = await _db.GetDataFirstOrDefault<ArtistRecordDto, dynamic>(sproc, parameter);
+
+            return album ?? null;
+        }
     }
 }

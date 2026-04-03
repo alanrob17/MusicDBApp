@@ -1,4 +1,5 @@
 ﻿using MusicDAL.Models;
+using MusicDAL.Models.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace MusicDAL.Repository
         Task<string> GetArtistNumberOfRecordsAsync(int artistId);
         Task<List<Record>> SelectAsync();
         List<Record> Select(string show);
+        Task<ArtistRecordDto> GetArtisRecordAsync(int recordId);
         Task<List<Record>> SelectArtistRecordsAsync(int artistId);
         Task<List<Record>> SelectRecordReviewsAsync();
         List<Record> SelectRecordReviews();
@@ -25,6 +27,5 @@ namespace MusicDAL.Repository
             string pressing, string rating, int discs, string media, DateTime bought, decimal cost, string coverName,
             string review);
         Task<int> UpdateAsync(Record record);
-
     }
 }

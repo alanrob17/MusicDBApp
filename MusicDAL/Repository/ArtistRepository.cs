@@ -9,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MusicDAL.Models.Dtos;
 
 namespace MusicDAL.Repository
 {
@@ -57,16 +58,13 @@ namespace MusicDAL.Repository
 
         public async Task<Artist> SelectAsync(int artistId)
         {
-            using (var connection = new SqlConnection(AppSettings.Instance.ConnectString))
-            {
-                string sproc = "up_ArtistSelectById";
-                var parameter = new DynamicParameters();
-                parameter.Add("@ArtistId", artistId);
+              string sproc = "up_ArtistSelectById";
+              var parameter = new DynamicParameters();
+              parameter.Add("@ArtistId", artistId);
 
-                Artist artist = await _db.GetDataFirstOrDefault<Artist, dynamic>(sproc, parameter);
+              Artist artist = await _db.GetDataFirstOrDefault<Artist, dynamic>(sproc, parameter);
 
-                return artist ?? null;
-            }
+              return artist ?? null;
         }
 
         public async Task<List<Artist>> SelectArtistWithNoBioAsync()
@@ -240,5 +238,6 @@ namespace MusicDAL.Repository
 
             return biography;
         }
+
     }
 }

@@ -164,15 +164,24 @@
     <Compile Include="Data\IDataAccess.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Models\Artist.cs" />
-    <Compile Include="Models\Disk.cs" />
+    <Compile Include="Models\Disc.cs" />
+    <Compile Include="Models\Dtos\ArtistRecordDiscDto.cs" />
+    <Compile Include="Models\Dtos\ArtistRecordDto.cs" />
+    <Compile Include="Models\Dtos\ArtistRecordTrackDto.cs" />
+    <Compile Include="Models\Dtos\TotalDiscsDto.cs" />
+    <Compile Include="Models\Dtos\TotalTimeDto.cs" />
     <Compile Include="Models\Record.cs" />
     <Compile Include="Models\Track.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ArtistRepository.cs" />
+    <Compile Include="Repository\DiscRepository.cs" />
     <Compile Include="Repository\IArtistRepository.cs" />
+    <Compile Include="Repository\IDiscRepository.cs" />
     <Compile Include="Repository\IRecordRepository.cs" />
+    <Compile Include="Repository\ITrackRepository.cs" />
     <Compile Include="Repository\RecordRepository.cs" />
     <Compile Include="Repository\RepositoryInitialiser.cs" />
+    <Compile Include="Repository\TrackRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
