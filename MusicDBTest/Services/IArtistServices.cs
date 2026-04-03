@@ -9,6 +9,7 @@ namespace MusicDBTest.Services
 {
     public interface IArtistServices
     {
+        Task RunArtistServices();
         Task GetArtistsAsync();
         Task GetArtists();
         Task GetArtistListAsync();

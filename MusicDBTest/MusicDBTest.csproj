@@ -47,6 +47,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ArtistServices.cs" />
     <Compile Include="Services\IArtistServices.cs" />
+    <Compile Include="Services\IRecordServices.cs" />
+    <Compile Include="Services\RecordServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

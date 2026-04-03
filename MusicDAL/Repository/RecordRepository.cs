@@ -316,7 +316,7 @@ namespace MusicDAL.Repository
             }
         }
 
-        public async Task<ArtistRecordDto> GetArtisRecordAsync(int recordId)
+        public async Task<ArtistRecordDto> GetArtistRecordAsync(int recordId)
         {
             string sproc = "up_GetArtistRecordDetails";
             var parameter = new DynamicParameters();
@@ -325,6 +325,15 @@ namespace MusicDAL.Repository
             var album = await _db.GetDataFirstOrDefault<ArtistRecordDto, dynamic>(sproc, parameter);
 
             return album ?? null;
+        }
+
+        public async Task<List<ArtistRecordDto>> SelectArtistRecordListAsync()
+        {
+            var sproc = "up_getArtistRecordList";
+
+            var albums = await _db.GetData<ArtistRecordDto, dynamic>(sproc, new { });
+
+            return albums.ToList();
         }
     }
 }
