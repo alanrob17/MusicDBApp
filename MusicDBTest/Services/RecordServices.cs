@@ -30,9 +30,14 @@ namespace MusicDBTest.Services
             // await GetArtistRecordNumberAsync();
             // await GetFormattedRecordAsync();
             // await SelectRecordsAsync();
-            await SelectRecords2Async();
-            // await SelectRecordsShow();
-            // await SelectRecordsByArtistIdAsync();
+            // await SelectRecords2Async();
+            // SelectRecordsShow("all");
+            // SelectRecordsShow("2017");
+            // SelectRecordsShow("Rock");
+            // SelectRecordsShow("Rockdesc");
+            // SelectRecordsShow("r1974");
+            // SelectRecordsShow("aid26");
+            await SelectRecordsByArtistIdAsync();
             // await SelectRecordReviewsAsync();
             // await GetRecordedYearNumberAsync();
             // await NoRecordReviewsAsync();
@@ -108,6 +113,28 @@ namespace MusicDBTest.Services
             foreach (var record in albums)
             {
                 Console.WriteLine($"{record.ArtistId} -- {record.ArtistName} -- {record.Name} [{record.Recorded}] - {record.Field} - {record.Length}\n");
+            }
+        }
+
+        public void SelectRecordsShow(string show)
+        {
+            var records = _rr.Select(show);
+
+            foreach (var record in records)
+            {
+                Console.WriteLine($"{record.ArtistName} -- {record.Name} {record.Recorded} - Length: {record.Length}\n");
+            }
+        }
+
+        public async Task SelectRecordsByArtistIdAsync()
+        {
+            var artistId = 26;
+
+            var records = await _rr.SelectArtistRecordsAsync(artistId);
+
+            foreach (var record in records)
+            {
+                Console.WriteLine($"{record.RecordId} -- {record.Name}");
             }
         }
 
@@ -261,30 +288,6 @@ namespace MusicDBTest.Services
         //    foreach (var record in records)
         //    {
         //        Console.WriteLine($"{record.ArtistName} -- {record.Name}\n{record.Review}\n");
-        //    }
-        //}
-
-        //public async Task SelectRecordsByArtistIdAsync()
-        //{
-        //    var artistId = 114;
-
-        //    var records = await _rr.SelectArtistRecordsAsync(artistId);
-
-        //    foreach (var record in records)
-        //    {
-        //        Console.WriteLine($"{record.RecordId} -- {record.Name}");
-        //    }
-        //}
-
-        //public async Task SelectRecordsShow()
-        //{
-        //    var show = "r1974";
-
-        //    var records = _rr.Select(show);
-
-        //    foreach (var record in records)
-        //    {
-        //        Console.WriteLine($"{record.ArtistName} -- {record.Name} {record.Recorded} - {record.Media} : {record.Bought:d}\n");
         //    }
         //}
 

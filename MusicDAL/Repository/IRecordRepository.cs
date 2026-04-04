@@ -14,7 +14,7 @@ namespace MusicDAL.Repository
         Task<string> CountDiscsAsync(string show);
         Task<string> GetArtistNumberOfRecordsAsync(int artistId);
         Task<List<Record>> SelectAsync();
-        List<Record> Select(string show);
+        List<ArtistRecordDto> Select(string show);
         Task<ArtistRecordDto> GetArtistRecordAsync(int recordId);
         Task<List<Record>> SelectArtistRecordsAsync(int artistId);
         Task<List<Record>> SelectRecordReviewsAsync();

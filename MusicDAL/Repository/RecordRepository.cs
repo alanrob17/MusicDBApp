@@ -78,21 +78,16 @@ namespace MusicDAL.Repository
             return records.ToList();
         }
 
-        public List<Record> Select(string show)
+        public List<ArtistRecordDto> Select(string show)
         {
-            if (show == null)
-            {
-                throw new ArgumentNullException("show");
-            }
-
             var sproc = "up_RecordSelectShowNew";
 
             var parameter = new DynamicParameters();
             parameter.Add("@Show", show);
 
-            IEnumerable<Record> records = _db.GetBrowseData<Record, dynamic>(sproc, parameter);
+            IEnumerable<ArtistRecordDto> albums = _db.GetBrowseData<ArtistRecordDto, dynamic>(sproc, parameter);
 
-            return records.ToList();
+            return albums.ToList();
         }
 
         public Record Select(int recordId)
