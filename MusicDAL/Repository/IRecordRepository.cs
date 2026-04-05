@@ -17,9 +17,10 @@ namespace MusicDAL.Repository
         List<ArtistRecordDto> Select(string show);
         Task<ArtistRecordDto> GetArtistRecordAsync(int recordId);
         Task<List<Record>> SelectArtistRecordsAsync(int artistId);
-        Task<List<Record>> SelectRecordReviewsAsync();
-        List<Record> SelectRecordReviews();
+        Task<List<ArtistRecordDto>> SelectRecordReviewsAsync();
+        List<ArtistRecordDto> SelectRecordReviews();
         Task<string> GetRecordedYearNumberAsync(int year);
+        Task<List<ArtistRecordDto>> NoRecordReviewsAsync();
         Task<int> InsertAsync(Record record);
         Task<int> InsertAsync(int artistId, string name, string field, int recorded, string label, string pressing,
             string rating, int discs, string media, DateTime bought, decimal cost, string coverName, string review);

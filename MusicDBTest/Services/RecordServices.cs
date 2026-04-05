@@ -37,12 +37,14 @@ namespace MusicDBTest.Services
             // SelectRecordsShow("Rockdesc");
             // SelectRecordsShow("r1974");
             // SelectRecordsShow("aid26");
-            await SelectRecordsByArtistIdAsync();
+            // await SelectRecordsByArtistIdAsync();
             // await SelectRecordReviewsAsync();
+            // SelectRecordReviews();
             // await GetRecordedYearNumberAsync();
             // await NoRecordReviewsAsync();
             // ToShortDate();
-            // await GetTotalsAsync();
+
+            // To be tested
             // await InsertRecordAsync();
             // await InsertRecord2Async();
             // await UpdateRecordAsync();  
@@ -136,6 +138,52 @@ namespace MusicDBTest.Services
             {
                 Console.WriteLine($"{record.RecordId} -- {record.Name}");
             }
+        }
+
+        public async Task SelectRecordReviewsAsync()
+        {
+            var albums = await _rr.SelectRecordReviewsAsync();
+
+            foreach (var record in albums)
+            {
+                Console.WriteLine($"{record.ArtistName} -- {record.Name}\n{record.Review}\n");
+            }
+        }
+
+        public void SelectRecordReviews()
+        {
+            var albums = _rr.SelectRecordReviews();
+
+            foreach (var record in albums)
+            {
+                Console.WriteLine($"{record.ArtistName} -- {record.Name}\n{record.Review}\n");
+            }
+        }
+
+        public async Task GetRecordedYearNumberAsync()
+        {
+            var year = 1975;
+            var count = await _rr.GetRecordedYearNumberAsync(year);
+
+            Console.WriteLine($"Year {year}: has {count} discs");
+        }
+
+        public async Task NoRecordReviewsAsync()
+        {
+            List<ArtistRecordDto> records = await _rr.NoRecordReviewsAsync();
+
+            foreach (var record in records)
+            {
+                Console.WriteLine($"{record.ArtistId}: {record.ArtistName} -- {record.RecordId}: {record.Name} - {record.Recorded}\n");
+            }
+        }
+
+        public void ToShortDate()
+        {
+            var dateStr = "05-04-2026";
+            var myDate = MusicDAL.Extensions.DateTimeExtensions.ToShortDate(dateStr);
+
+            Console.WriteLine(myDate);
         }
 
         //public async Task DeleteRecordAsync()
@@ -243,52 +291,6 @@ namespace MusicDBTest.Services
         //    var recordId = await _rr.InsertAsync(record);
 
         //    Console.WriteLine($"New Id: {recordId}");
-        //}
-
-        //public async Task GetTotalsAsync()
-        //{
-        //    var artists = await _rr.GetTotalCostsAsync();
-
-        //    foreach (var artist in artists)
-        //    {
-        //        Console.WriteLine($"{artist.Name}: {artist.TotalDiscs}: {artist.TotalCost:C}\n");
-        //    }
-        //}
-
-        //public void ToShortDate()
-        //{
-        //    var dateStr = "28-12-2015";
-        //    var myDate = MusicDAL.Extensions.DateTimeExtensions.ToShortDate(dateStr);
-
-        //    Console.WriteLine(myDate);
-        //}
-
-        //public async Task NoRecordReviewsAsync()
-        //{
-        //    List<MissingReviewDto> records = await _rr.NoRecordReviewsAsync();
-
-        //    foreach (var record in records)
-        //    {
-        //        Console.WriteLine($"{record.RecordId}: {record.Name} - {record.Record}\n");
-        //    }
-        //}
-
-        //public async Task GetRecordedYearNumberAsync()
-        //{
-        //    var year = 1974;
-        //    var count = await _rr.GetRecordedYearNumberAsync(year);
-
-        //    Console.WriteLine($"Count: {count} discs");
-        //}
-
-        //public async Task SelectRecordReviewsAsync()
-        //{
-        //    var records = await _rr.SelectRecordReviewsAsync();
-
-        //    foreach (var record in records)
-        //    {
-        //        Console.WriteLine($"{record.ArtistName} -- {record.Name}\n{record.Review}\n");
-        //    }
         //}
 
         public async Task<string> ToStringAsync(Record record)

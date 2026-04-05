@@ -114,20 +114,20 @@ namespace MusicDAL.Repository
             return records.ToList();
         }
 
-        public async Task<List<Record>> SelectRecordReviewsAsync()
+        public async Task<List<ArtistRecordDto>> SelectRecordReviewsAsync()
         {
             var sproc = "up_SelectRecordReviews";
 
-            var records = await _db.GetData<Record, dynamic>(sproc, new { });
+            var records = await _db.GetData<ArtistRecordDto, dynamic>(sproc, new { });
 
             return records.ToList();
         }
 
-        public List<Record> SelectRecordReviews()
+        public List<ArtistRecordDto> SelectRecordReviews()
         {
             var sproc = "up_SelectRecordReviews2";
 
-            var records = _db.GetBrowseData<Record, dynamic>(sproc, new { });
+            var records = _db.GetBrowseData<ArtistRecordDto, dynamic>(sproc, new { });
 
             return records.ToList();
         }
@@ -143,6 +143,15 @@ namespace MusicDAL.Repository
             discs = await _db.GetCountOrId(sproc, parameter);
 
             return discs.ToString(CultureInfo.InvariantCulture);
+        }
+
+        public async Task<List<ArtistRecordDto>> NoRecordReviewsAsync()
+        {
+            var sproc = "up_GetNoRecordReview";
+
+            var records = await _db.GetData<ArtistRecordDto, dynamic>(sproc, new { });
+
+            return records.ToList();
         }
 
         public static string ToShortDate(object bought)
