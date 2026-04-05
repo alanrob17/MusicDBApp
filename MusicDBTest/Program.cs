@@ -18,8 +18,11 @@ namespace MusicDBTest
             //var artistServices = new ArtistServices();
             //await artistServices.RunArtistServices();
 
-            var recordServices = new RecordServices();
-            await recordServices.RunRecordServices();
+            // var recordServices = new RecordServices();
+            // await recordServices.RunRecordServices();
+
+            var discServices = new DiscServices();
+            await discServices.RunDiscServices();
 
         }
     }
