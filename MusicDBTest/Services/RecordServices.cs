@@ -97,7 +97,6 @@ namespace MusicDBTest.Services
         {
             var records = await _rr.SelectAsync();
 
-            // change this to only get the artistId and name
             var artists = await _ar.SelectAsync();
             var artistDict = artists.ToDictionary(a => a.ArtistId, a => a.Name);
     

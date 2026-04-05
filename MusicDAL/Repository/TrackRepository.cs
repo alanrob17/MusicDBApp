@@ -28,7 +28,7 @@ namespace MusicDAL.Repository
             return await _db.GetData<Track, dynamic>(sproc, new { });
         }
 
-        public async Task<IEnumerable<Track>> GetAllTracksAsync(bool includeTechDetails = true)
+        public async Task<IEnumerable<Track>> GetAllTracksAsync(bool includeTechDetails)
         {
             var sproc = "up_CompleteTrackSelectAll";
             return await _db.GetData<Track, dynamic>(sproc, new { IncludeTechnicalDetails = includeTechDetails ? 1 : 0 });

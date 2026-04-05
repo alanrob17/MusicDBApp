@@ -50,7 +50,9 @@
     <Compile Include="Services\IArtistServices.cs" />
     <Compile Include="Services\IDiscServices.cs" />
     <Compile Include="Services\IRecordServices.cs" />
+    <Compile Include="Services\ITrackServices.cs" />
     <Compile Include="Services\RecordServices.cs" />
+    <Compile Include="Services\TrackServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
