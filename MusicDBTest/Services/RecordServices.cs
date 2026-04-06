@@ -43,23 +43,22 @@ namespace MusicDBTest.Services
             // await GetRecordedYearNumberAsync();
             // await NoRecordReviewsAsync();
             // ToShortDate();
-
-            // To be added
-            // await GetArtistNumberOfRecordsAsync("Bob Dylan");
             // await GetRecordByNameAsync("Blonde");
-            // await GetRecordsByNameAsync("Bringing");
+            // await GetRecordsByNameAsync("Blood On the Tracks");
             // await GetTotalAlbumTimeAsync();
             // await GetTotalTimeByArtistIdAsync(26);
             // await GetArtistFromArtistNameAsync("Neil Young");
-            // await CountDiscsAsync("Blues");
+            // await CountDiscsAsync("Rock");
             // await GetArtistNameFromRecordAsync(1373);
             // await GetRecordListByYearAsync(1974);
             // await GetRecordDetailsAsync(3232);
             // await GetRecordHtmlAsync(3232);
             // await GetAlbumLengthAsync(306);
             // await GetAlbumDetailsAndLengthAsync(306);
-            // await GetNullRecordField(); // where Field is null
-            // await GetAllRecordFoldersAsync();
+            // await GetNullRecordField();
+            await GetAllRecordFoldersAsync();
+
+            // To be added
 
             // To be tested
             // await InsertRecordAsync();
@@ -67,6 +66,175 @@ namespace MusicDBTest.Services
             // await UpdateRecordAsync();  
             // await UpdateRecord2Async();
             // await DeleteRecordAsync();  
+        }
+
+        public async Task GetAllRecordFoldersAsync()
+        {
+            IEnumerable<Record> records = await _rr.GetAllRecordFoldersAsync();
+
+            foreach (var record in records)
+            {
+                var artist = string.Empty;
+                if (!string.IsNullOrWhiteSpace(record.Folder))
+                {
+                    artist = ExtractArtistFromPath(record.Folder);
+                }
+
+                Console.WriteLine($"ArtistId: {record.ArtistId}: {artist} - {record.Folder}");
+            }
+        }
+
+        public async Task GetNullRecordField()
+        {
+            IEnumerable<ArtistRecordDto> records = await _rr.GetNullRecordFieldAsync();
+
+            foreach (var record in records)
+            {
+                Console.WriteLine($"RecordId: {record.RecordId} - {record.ToString()}");
+            }
+        }
+
+        public async Task GetAlbumDetailsAndLengthAsync(int recordId)
+        {
+            ArtistRecordDto album = await _rr.GetAlbumDetailsAsync(recordId);
+            if (album != null)
+            {
+                Console.WriteLine($"Album length: {album.ToString()}");
+            }
+            else
+            {
+                Console.WriteLine("No album found.");
+            }
+        }
+
+        public async Task GetAlbumLengthAsync(int recordId)
+        {
+            string albumLength = await _rr.GetAlbumLengthAsync(recordId);
+            if (albumLength != null)
+            {
+                Console.WriteLine($"Album length: {albumLength}");
+            }
+            else
+            {
+                Console.WriteLine("No album length found.");
+            }
+        }
+
+        public async Task GetRecordHtmlAsync(int recordId)
+        {
+            ArtistRecordDto record = await _rr.GetRecordHtmlAsync(recordId);
+            if (record != null)
+            {
+                string recordHtml = RecordHtml(record);
+                Console.WriteLine(recordHtml);
+            }
+            else
+            {
+                Console.WriteLine($"Record with ID {recordId} not found.");
+            }
+        }
+
+        public async Task GetRecordDetailsAsync(int recordId)
+        {
+            var record = await _rr.GetRecordDetailsAsync(recordId);
+
+            if (record != null)
+            {
+                Console.WriteLine(record.ToString());
+            }
+            else
+            {
+                Console.WriteLine($"Record with ID {recordId} not found.");
+            }
+        }
+
+        public async Task GetRecordListByYearAsync(int year)
+        {
+            var records = await _rr.GetRecordsByRecordedYearAsync(year);
+            if (records != null)
+            {
+                foreach (var record in records)
+                {
+                    Console.WriteLine(record.ToString());
+                }
+            }
+            else
+            {
+                Console.WriteLine($"No records found for Year recorded: {year}");
+            }
+        }
+
+        public async Task GetArtistNameFromRecordAsync(int recordId)
+        {
+            var artistName = await _rr.GetArtistNameFromRecordAsync(recordId);
+            if (!string.IsNullOrEmpty(artistName))
+            {
+                Console.WriteLine($"Artist Name: {artistName}");
+            }
+            else
+            {
+                Console.WriteLine($"No artist found for record ID: {recordId}");
+            }
+        }
+
+        public async Task CountDiscsAsync(string show)
+        {
+            var discs = await _rr.CountDiscsAsync(show);
+            Console.WriteLine($"{show}: Total Discs: {discs}");
+        }
+
+        public async Task GetArtistFromArtistNameAsync(string name)
+        {
+            Artist artist = await _rr.GetArtistFromNameAsync(name);
+            if (artist != null)
+            {
+                Console.WriteLine(artist.ToString());
+            }
+            else
+            {
+                Console.WriteLine($"Artist with name '{name}' not found.");
+            }
+        }
+
+        public async Task GetTotalTimeByArtistIdAsync(int artistId)
+        {
+            TotalTimeDto time = await _rr.GetTotalAlbumTimeByArtistIdAsync(artistId);
+
+            Artist artist = await _rr.GetArtistFromRecordArtistIdAsync(artistId);
+
+            if (time != null && artist != null)
+            {
+                Console.WriteLine($"Total Album time for artist: {artist.Name} - {time.TotalLengthFormatted}");
+            }
+            else
+            {
+                Console.WriteLine($"No records found for artist {artistId}.");
+            }
+        }
+
+        public async Task GetTotalAlbumTimeAsync()
+        {
+            TotalTimeDto time = await _rr.GetTotalAlbumTimeAsync();
+            Console.WriteLine($"Total time for all albums: {time.TotalLengthFormatted}");
+        }
+
+        public async Task GetRecordsByNameAsync(string name)
+        {
+            // Get all records that matches the name
+            var records = await _rr.GetRecordsByNameAsync(name);
+
+            foreach (var record in records)
+            {
+                Console.WriteLine(record.ToString());
+            }
+
+        }
+
+        public async Task GetRecordByNameAsync(string name)
+        {
+            // Only get first record that matches the name
+            Record record = await _rr.GetRecordByNameAsync(name);
+            Console.WriteLine(record.ToString());
         }
 
         public async Task GetRecordAsync()
@@ -335,6 +503,38 @@ namespace MusicDBTest.Services
             }
 
             return str.ToString();
+        }
+
+        private string RecordHtml(ArtistRecordDto record)
+        {
+            var recordHtml = $@"
+                <h1>{record.Name}</h1>
+                <h2>Artist: {record.ArtistName}</h2>
+                <p>ArtistId: {record.ArtistId}</p>
+                <p>RecordId: {record.RecordId}</p>
+                <p>Field: {record.Field}</p>
+                <p>Recorded: {record.Recorded}</p>
+                <p>Discs: {record.Discs}</p>
+                <p>Review: {record.Review}</p>
+                <p>Album length: {record.Length}</p>";
+            return recordHtml;
+        }
+
+        private static string ExtractArtistFromPath(string path)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                throw new ArgumentException("Path cannot be null or empty", nameof(path));
+            }
+
+            string[] parts = path.Split('\\');
+
+            if (parts.Length < 4)
+            {
+                throw new FormatException($"Path does not contain enough segments. Expected format: G:\\Music\\Library\\ArtistName\\...");
+            }
+
+            return parts[3];
         }
     }
 }

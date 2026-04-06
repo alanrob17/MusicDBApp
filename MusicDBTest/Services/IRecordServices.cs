@@ -22,5 +22,19 @@ namespace MusicDBTest.Services
         Task GetRecordedYearNumberAsync();
         Task NoRecordReviewsAsync();
         void ToShortDate();
+        Task GetRecordByNameAsync(string name);
+        Task GetRecordsByNameAsync(string name);
+        Task GetTotalAlbumTimeAsync();
+        Task GetTotalTimeByArtistIdAsync(int artistId);
+        Task GetArtistFromArtistNameAsync(string name);
+        Task CountDiscsAsync(string show);
+        Task GetArtistNameFromRecordAsync(int recordId);
+        Task GetRecordListByYearAsync(int year);
+        Task GetRecordDetailsAsync(int recordId);
+        Task GetRecordHtmlAsync(int recordId);
+        Task GetAlbumLengthAsync(int recordId);
+        Task GetAlbumDetailsAndLengthAsync(int recordId);
+        Task GetNullRecordField();
+        Task GetAllRecordFoldersAsync();
     }
 }

@@ -28,5 +28,12 @@ namespace MusicDAL.Repository
             string pressing, string rating, int discs, string media, DateTime bought, decimal cost, string coverName,
             string review);
         Task<int> UpdateAsync(Record record);
+        Task<Record> GetRecordByNameAsync(string name);
+        Task<IEnumerable<Record>> GetRecordsByNameAsync(string name);
+        Task<TotalTimeDto> GetTotalAlbumTimeAsync();
+        Task<TotalTimeDto> GetTotalAlbumTimeByArtistIdAsync(int artistId);
+        Task<Artist> GetArtistFromNameAsync(string name);
+        Task<string> GetArtistNameFromRecordAsync(int recordId);
+        Task<ArtistRecordDto> GetAlbumDetailsAsync(int recordId);
     }
 }

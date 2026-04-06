@@ -4,6 +4,7 @@ using MusicDAL.Data;
 using MusicDAL.Models;
 using MusicDAL.Models.Dtos;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
@@ -339,5 +340,134 @@ namespace MusicDAL.Repository
 
             return albums.ToList();
         }
+
+        public async Task<Record> GetRecordByNameAsync(string name)
+        {
+            var sproc = "up_GetRecordByPartialName";
+            var parameter = new DynamicParameters();
+            parameter.Add("@Name", name);
+
+            var record = _db.GetFirstOrDefault<Record, dynamic>(sproc, parameter);
+
+            return record;
+        }
+
+        public async Task<IEnumerable<Record>> GetRecordsByNameAsync(string name)
+        {
+            var sproc = "up_GetRecordByPartialName";
+            var parameter = new DynamicParameters();
+            parameter.Add("@Name", name);
+
+            var records = await _db.GetData<Record, dynamic>(sproc, parameter);
+
+            return records.ToList();
+        }
+
+        public async Task<TotalTimeDto> GetTotalAlbumTimeAsync()
+        {
+            string sproc = "adm_CalculateTotalAlbumTime";
+            TotalTimeDto time = await _db.GetDataFirstOrDefault<TotalTimeDto, dynamic>(sproc, new { });
+
+            return time ?? new TotalTimeDto
+            {
+                TotalSeconds = "0",
+                TotalLengthFormatted = "00:00:00:00"
+            };
+        }
+
+        public async Task<TotalTimeDto> GetTotalAlbumTimeByArtistIdAsync(int artistId)
+        {
+            string sproc = "adm_CalculateTotalAlbumTimeByArtistId";
+            var parameter = new { ArtistId = artistId };
+            TotalTimeDto time = await _db.GetDataFirstOrDefault<TotalTimeDto, dynamic>(sproc, parameter);
+
+            return time ?? new TotalTimeDto
+            {
+                TotalSeconds = "0",
+                TotalLengthFormatted = "00:00:00:00"
+            };
+        }
+
+        public async Task<Artist> GetArtistFromRecordArtistIdAsync(int artistId)
+        {
+            string sproc = "up_GetArtistFromRecordArtistId";
+            var parameter = new { ArtistId = artistId };
+            Artist artist = await _db.GetDataFirstOrDefault<Artist, dynamic>(sproc, parameter);
+
+            return artist ?? new Artist
+            {
+                ArtistId = artistId,
+                Name = "Unknown Artist"
+            };
+        }
+
+        public async Task<Artist> GetArtistFromNameAsync(string name)
+        {
+            string sproc = "up_GetArtistByName";
+            var parameter = new { Name = name };
+            Artist artist = await _db.GetDataFirstOrDefault<Artist, dynamic>(sproc, parameter);
+
+            return artist ?? new Artist
+            {
+                Name = "Unknown Artist"
+            };
+        }
+
+        public async Task<string> GetArtistNameFromRecordAsync(int recordId)
+        {
+            var sproc = "up_GetArtistNameByRecordId";
+            var parameter = new { RecordId = recordId };
+            var name = await _db.GetText(sproc, parameter);
+            return name ?? string.Empty;
+        }
+
+        public async Task<IEnumerable<ArtistRecordDto>> GetRecordsByRecordedYearAsync(int year)
+        {
+            var sproc = "up_GetRecordsByYearRecorded";
+            var parameter = new { Year = year };
+            return await _db.GetData<ArtistRecordDto, dynamic>(sproc, parameter);
+        }
+
+        public async Task<ArtistRecordDto> GetRecordDetailsAsync(int recordId)
+        {
+            var sproc = "up_getSingleArtistAndRecord";
+            var parameter = new { RecordId = recordId };
+            return await _db.GetDataFirstOrDefault<ArtistRecordDto, dynamic>(sproc, parameter);
+        }
+
+        public async Task<ArtistRecordDto> GetRecordHtmlAsync(int recordId)
+        {
+            var sproc = "up_getSingleArtistAndRecord";
+            var parameter = new { RecordId = recordId };
+            return await _db.GetDataFirstOrDefault<ArtistRecordDto, dynamic>(sproc, parameter);
+        }
+
+        public async Task<string> GetAlbumLengthAsync(int recordId)
+        {
+            var sproc = "adm_GetAlbumDiscsLength";
+            var parameters = new DynamicParameters();
+            parameters.Add("@RecordId", recordId);
+            return await _db.GetText(sproc, parameters);
+        }
+
+        public async Task<ArtistRecordDto> GetAlbumDetailsAsync(int recordId)
+        {
+            var sproc = "adm_GetAlbumDetails";
+            var parameter = new { RecordId = recordId };
+            return await _db.GetDataFirstOrDefault<ArtistRecordDto, dynamic>(sproc, parameter);
+        }
+
+        public Task<IEnumerable<ArtistRecordDto>> GetNullRecordFieldAsync()
+        {
+            var sproc = "adm_GetNullRecordField";
+            return _db.GetData<ArtistRecordDto, dynamic>(sproc, new { });
+        }
+
+        public async Task<IEnumerable<Record>> GetAllRecordFoldersAsync()
+        {
+            var sproc = "adm_GetRecordFolders";
+            return await _db.GetData<Record, dynamic>(sproc, new { });
+        }
+
     }
 }
