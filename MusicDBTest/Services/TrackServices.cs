@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using MusicDAL.Models.Dtos;
 
 namespace MusicDBTest.Services
 {
@@ -29,7 +30,13 @@ namespace MusicDBTest.Services
             // await GetArtistRecordAsync(26, 3322);
             // await GetTotalAlbumTimeAsync();
             // await GetAllSingleTracksAsync();
-            await GetArtistGuestTracksAsync("Bob Dylan");
+            // await GetArtistGuestTracksAsync("Bob Dylan");
+            // await GetTrackListingAsync(234);
+            // await GetRecordTrackListingAsync(175);
+            // await GetBriefListAsync();
+            // await GetBriefListByYearAsync(1974);
+            // await GetHighQualityTracksAsync();
+            await GetHighQualityAlbumsAsync();
         }
 
         public async Task GetAllTracksAsync()
@@ -119,32 +126,62 @@ namespace MusicDBTest.Services
 
         public async Task GetTrackListingAsync(int discId)
         {
-            throw new NotImplementedException();
+            IEnumerable<Track> tracks = await _tr.GetTrackListingAsync(discId);
+
+            foreach (var track in tracks)
+            {
+                Console.WriteLine($"Did: {track.DiscId} - {track.DiscNumber} {track.Name} - {track.Recorded}. {track.Duration} - {track.Media} - {track.Artist} - {track.Album}");
+            }
         }
 
         public async Task GetRecordTrackListingAsync(int recordId)
         {
-            throw new NotImplementedException();
+            var tracks = await _tr.GetRecordTrackListingAsync(recordId);
+
+            foreach (var track in tracks)
+            {
+                Console.WriteLine($"{track.ArtistName} - {track.RecordName} [{track.Recorded}] - {track.Number}. {track.FullTrackName} - {track.Duration.ToString(@"mm\:ss") ?? "N/A"}");
+            }
         }
 
         public async Task GetBriefListAsync()
         {
-            throw new NotImplementedException();
+            var tracks = await _tr.GetBriefListAsync();
+
+            foreach (var track in tracks)
+            {
+                Console.WriteLine($"{track.Artist} - {track.Recorded} {track.Album} - {track.Field}. {track.Number} - {track.Name} - {track.Length}");
+            }
         }
 
         public async Task GetBriefListByYearAsync(int year)
         {
-            throw new NotImplementedException();
+            var tracks = await _tr.GetBriefListByYearAsync(year);
+
+            foreach (var track in tracks)
+            {
+                Console.WriteLine($"{track.Artist} - {track.Recorded} {track.Album} - {track.Field}. {track.Number} - {track.Name} - {track.Length}");
+            }
         }
 
         public async Task GetHighQualityTracksAsync()
         {
-            throw new NotImplementedException();
+            var tracks = await _tr.GetHighQualityTracksAsync();
+
+            foreach (var track in tracks)
+            {
+                Console.WriteLine($"{track.ArtistName} - {track.RecordName} [{track.Recorded}] - {track.Number}. {track.FullTrackName} - {track.Duration.ToString(@"mm\:ss") ?? "N/A"}");
+            }
         }
 
         public async Task GetHighQualityAlbumsAsync()
         {
-            throw new NotImplementedException();
+            var albums = await _tr.GetHighQualityAlbumsAsync();
+
+            foreach (var album in albums)
+            {
+                Console.WriteLine($"{album.ArtistName} - {album.Name} [{album.Recorded}] - {album.Field} - {album.Length}");
+            }
         }
     }
 }
