@@ -44,6 +44,23 @@ namespace MusicDBTest.Services
             // await NoRecordReviewsAsync();
             // ToShortDate();
 
+            // To be added
+            // await GetArtistNumberOfRecordsAsync("Bob Dylan");
+            // await GetRecordByNameAsync("Blonde");
+            // await GetRecordsByNameAsync("Bringing");
+            // await GetTotalAlbumTimeAsync();
+            // await GetTotalTimeByArtistIdAsync(26);
+            // await GetArtistFromArtistNameAsync("Neil Young");
+            // await CountDiscsAsync("Blues");
+            // await GetArtistNameFromRecordAsync(1373);
+            // await GetRecordListByYearAsync(1974);
+            // await GetRecordDetailsAsync(3232);
+            // await GetRecordHtmlAsync(3232);
+            // await GetAlbumLengthAsync(306);
+            // await GetAlbumDetailsAndLengthAsync(306);
+            // await GetNullRecordField(); // where Field is null
+            // await GetAllRecordFoldersAsync();
+
             // To be tested
             // await InsertRecordAsync();
             // await InsertRecord2Async();

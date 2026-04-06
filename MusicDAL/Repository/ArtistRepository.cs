@@ -239,5 +239,40 @@ namespace MusicDAL.Repository
             return biography;
         }
 
+        public async Task<int> GetArtistCount()
+        {
+            var sproc = "up_GetArtistCount";
+            return await _db.GetCountOrId(sproc, new { });
+
+        }
+
+        public async Task<bool> CheckForArtistNameAsync(string name)
+        {
+            string sproc = "up_CheckArtistExists";
+            var parameter = new { Name = name };
+            return await _db.GetCountOrId(sproc, parameter) > 0;
+        }
+
+        public async Task<Artist> GetArtistByFirstLastNameAsync(string firstName, string lastName)
+        {
+            string sproc = "up_ArtistByFirstLastName";
+            var parameters = new DynamicParameters();
+            parameters.Add("@FirstName", firstName);
+            parameters.Add("@LastName", lastName);
+
+            return await _db.GetDataFirstOrDefault<Artist, dynamic>(sproc, parameters);
+        }
+
+        public async Task<string> GetBiographyFromRecordIdAsync(int recordId)
+        {
+            var sproc = "up_getBiography";
+
+            var parameter = new DynamicParameters();
+            parameter.Add("@RecordId", recordId);
+
+            string biography = _db.GetTextField<dynamic>(sproc, parameter);
+
+            return biography;
+        }
     }
 }

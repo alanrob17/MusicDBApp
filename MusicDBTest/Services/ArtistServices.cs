@@ -1,4 +1,5 @@
 ﻿using MusicDAL.Data;
+using MusicDAL.Models;
 using MusicDAL.Repository;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using MusicDAL.Models;
+using System.Xml.Linq;
 
 namespace MusicDBTest.Services
 {
@@ -31,10 +32,14 @@ namespace MusicDBTest.Services
             // await GetSingleArtistAsync(26);
             // await SelectArtistWithNoBioAsync();
             // await GetArtistIdByNameAsync();
-            await GetArtistIdByRecordIdAsync();
-            await ShowArtistAsync();
-            await GetBiographyAsync();
-            
+            // await GetArtistIdByRecordIdAsync();
+            // await ShowArtistAsync();
+            // await GetBiographyAsync();
+            // await CountArtistsAsync();
+            // await CheckForArtistNameAsync("Alan Robson");
+            // await GetArtistByFirstLastNameAsync("Bruce", "Cockburn");
+            await GetBiographyFromRecordIdAsync(123);
+
             // All the below have to be changed
             //await InsertAsync();
             //await Insert2Async();
@@ -43,6 +48,45 @@ namespace MusicDBTest.Services
             //await UpdateAsync();
             //await Update2Async();
             //await DeleteArtistAsync();
+        }
+
+        private async Task GetBiographyFromRecordIdAsync(int recordId)
+        { 
+            string biography = await _ar.GetBiographyFromRecordIdAsync(recordId);
+            var parameter = new { RecordId = recordId };
+
+            Console.WriteLine(!string.IsNullOrEmpty(biography)
+                ? $"Biography: {biography}"
+                : $"No biography found for RecordId: {recordId}");
+        }
+
+        private async Task GetArtistByFirstLastNameAsync(string firstName, string lastName)
+        {
+            var artist = await _ar.GetArtistByFirstLastNameAsync(firstName, lastName);
+            if (artist != null)
+            {
+                var biography = string.IsNullOrEmpty(artist.Biography) ? "No Biography" : (artist.Biography.Length > 30 ? artist.Biography.Substring(0, 60) + "..." : artist.Biography);
+                Console.WriteLine($"Id: {artist.ArtistId} - {artist.Name} - {biography}");
+            }
+            else
+            {
+                Console.WriteLine($"Artist with name {firstName} {lastName} not found.");
+            }
+        }
+
+        private async Task CheckForArtistNameAsync(string name)
+        {
+            var result = await _ar.CheckForArtistNameAsync(name);
+            Console.WriteLine(result
+                ? $"Artist {name} exists in the database."
+                : $"Artist {name} does not exist in the database.");
+        }
+
+        private async Task CountArtistsAsync()
+        {
+            var count = await _ar.GetArtistCount();
+
+            Console.WriteLine($"There are {count} artists in the database.");
         }
 
         public async Task GetArtistsAsync()

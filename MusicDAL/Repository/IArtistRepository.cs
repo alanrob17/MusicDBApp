@@ -23,5 +23,9 @@ namespace MusicDAL.Repository
         Task DeleteAsync(int artistId);
         Task<Artist> GetArtistByRecordIdAsync(int recordId);
         Task<string> GetBiographyAsync(int recordId);
+        Task<int> GetArtistCount();
+        Task<bool> CheckForArtistNameAsync(string name);
+        Task<Artist>GetArtistByFirstLastNameAsync(string firstName, string lastName);
+        Task<string> GetBiographyFromRecordIdAsync(int recordId);
     }
 }
