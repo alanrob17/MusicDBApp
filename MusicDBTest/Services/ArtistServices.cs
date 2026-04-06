@@ -50,7 +50,7 @@ namespace MusicDBTest.Services
             //await DeleteArtistAsync();
         }
 
-        private async Task GetBiographyFromRecordIdAsync(int recordId)
+        public async Task GetBiographyFromRecordIdAsync(int recordId)
         { 
             string biography = await _ar.GetBiographyFromRecordIdAsync(recordId);
             var parameter = new { RecordId = recordId };
@@ -60,7 +60,7 @@ namespace MusicDBTest.Services
                 : $"No biography found for RecordId: {recordId}");
         }
 
-        private async Task GetArtistByFirstLastNameAsync(string firstName, string lastName)
+        public async Task GetArtistByFirstLastNameAsync(string firstName, string lastName)
         {
             var artist = await _ar.GetArtistByFirstLastNameAsync(firstName, lastName);
             if (artist != null)
@@ -74,7 +74,7 @@ namespace MusicDBTest.Services
             }
         }
 
-        private async Task CheckForArtistNameAsync(string name)
+        public async Task CheckForArtistNameAsync(string name)
         {
             var result = await _ar.CheckForArtistNameAsync(name);
             Console.WriteLine(result
@@ -82,7 +82,7 @@ namespace MusicDBTest.Services
                 : $"Artist {name} does not exist in the database.");
         }
 
-        private async Task CountArtistsAsync()
+        public async Task CountArtistsAsync()
         {
             var count = await _ar.GetArtistCount();
 
