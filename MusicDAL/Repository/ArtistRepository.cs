@@ -274,5 +274,14 @@ namespace MusicDAL.Repository
 
             return biography;
         }
+
+        public async Task<List<ArtistTotalTimeDto>> GetArtistTotalTimesAsync()
+        {
+            var sproc = "adm_GetAllArtistTotalTimes";
+
+            IEnumerable<ArtistTotalTimeDto> artists = await _db.GetData<ArtistTotalTimeDto, dynamic>(sproc, new { });
+
+            return artists.ToList();
+        }
     }
 }

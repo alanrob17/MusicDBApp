@@ -168,6 +168,7 @@
     <Compile Include="Models\Dtos\ArtistRecordDiscDto.cs" />
     <Compile Include="Models\Dtos\ArtistRecordDto.cs" />
     <Compile Include="Models\Dtos\ArtistRecordTrackDto.cs" />
+    <Compile Include="Models\Dtos\ArtistTotalTimeDto.cs" />
     <Compile Include="Models\Dtos\TotalDiscsDto.cs" />
     <Compile Include="Models\Dtos\TotalTimeDto.cs" />
     <Compile Include="Models\Record.cs" />

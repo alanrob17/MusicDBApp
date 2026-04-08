@@ -1,4 +1,5 @@
 ﻿using MusicDAL.Models;
+using MusicDAL.Models.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,5 +28,6 @@ namespace MusicDAL.Repository
         Task<bool> CheckForArtistNameAsync(string name);
         Task<Artist>GetArtistByFirstLastNameAsync(string firstName, string lastName);
         Task<string> GetBiographyFromRecordIdAsync(int recordId);
+        Task<List<ArtistTotalTimeDto>> GetArtistTotalTimesAsync();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MusicDAL.Data;
 using MusicDAL.Models;
+using MusicDAL.Models.Dtos;
 using MusicDAL.Repository;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,8 @@ namespace MusicDBTest.Services
             // await CountArtistsAsync();
             // await CheckForArtistNameAsync("Alan Robson");
             // await GetArtistByFirstLastNameAsync("Bruce", "Cockburn");
-            await GetBiographyFromRecordIdAsync(123);
+            // await GetBiographyFromRecordIdAsync(123);
+            await GetArtistsTotalAlbumTimesAsync();
 
             // All the below have to be changed
             //await InsertAsync();
@@ -48,6 +50,16 @@ namespace MusicDBTest.Services
             //await UpdateAsync();
             //await Update2Async();
             //await DeleteArtistAsync();
+        }
+
+        public async Task GetArtistsTotalAlbumTimesAsync()
+        {
+            List<ArtistTotalTimeDto> artists = await _ar.GetArtistTotalTimesAsync();
+
+            foreach (var artist in artists)
+            {
+                Console.WriteLine($"{artist.ArtistId}: {artist.Name} -- [{artist.TotalSeconds}] - {artist.TotalLengthFormatted}\n");
+            }
         }
 
         public async Task GetBiographyFromRecordIdAsync(int recordId)
