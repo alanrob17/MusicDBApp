@@ -29,5 +29,6 @@ namespace MusicDAL.Repository
         Task<Artist>GetArtistByFirstLastNameAsync(string firstName, string lastName);
         Task<string> GetBiographyFromRecordIdAsync(int recordId);
         Task<List<ArtistTotalTimeDto>> GetArtistTotalTimesAsync();
+        Task<List<ArtistTotalStatisticsDto>> GetArtistTotalStatisticsAsync();
     }
 }

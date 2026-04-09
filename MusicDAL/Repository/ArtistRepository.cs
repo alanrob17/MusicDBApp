@@ -283,5 +283,14 @@ namespace MusicDAL.Repository
 
             return artists.ToList();
         }
+
+        public async Task<List<ArtistTotalStatisticsDto>> GetArtistTotalStatisticsAsync()
+        {
+            var sproc = "adm_GetArtistTotals";
+
+            IEnumerable<ArtistTotalStatisticsDto> artists = await _db.GetData<ArtistTotalStatisticsDto, dynamic>(sproc, new { });
+
+            return artists.ToList();
+        }
     }
 }

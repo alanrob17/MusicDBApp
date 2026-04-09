@@ -1,0 +1,21 @@
+Music DB Web Pages
+==================
+
+Statistics
+----------
+
+* Total Times
+
+	A page with an Artists total time for digital music - ordered by the longest to the shortest.
+
+* Artist Stats
+
+	A page with Artist stats this will include:
+	
+	adm_GetArtistTotals
+	<td>@Model.TotalTracks.ToString("N0")</td>
+	
+	Total time length
+	Number of Albums
+	Number of discs
+	Number of tracks

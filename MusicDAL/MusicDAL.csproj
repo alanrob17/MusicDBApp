@@ -163,11 +163,13 @@
     <Compile Include="Data\DataAccess.cs" />
     <Compile Include="Data\IDataAccess.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\IntExtensions.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Disc.cs" />
     <Compile Include="Models\Dtos\ArtistRecordDiscDto.cs" />
     <Compile Include="Models\Dtos\ArtistRecordDto.cs" />
     <Compile Include="Models\Dtos\ArtistRecordTrackDto.cs" />
+    <Compile Include="Models\Dtos\ArtistTotalStatisticsDto.cs" />
     <Compile Include="Models\Dtos\ArtistTotalTimeDto.cs" />
     <Compile Include="Models\Dtos\TotalDiscsDto.cs" />
     <Compile Include="Models\Dtos\TotalTimeDto.cs" />

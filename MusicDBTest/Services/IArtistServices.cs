@@ -27,5 +27,6 @@ namespace MusicDBTest.Services
         Task GetArtistByFirstLastNameAsync(string firstName, string lastName);
         Task GetBiographyFromRecordIdAsync(int recordId);
         Task GetArtistsTotalAlbumTimesAsync();
+        Task GetArtistsTotalStatisticsAsync();
     }
 }
