@@ -15,8 +15,8 @@ namespace MusicDBTest
     {
         public static async Task Main(string[] args)
         {
-            var artistServices = new ArtistServices();
-            await artistServices.RunArtistServices();
+            // var artistServices = new ArtistServices();
+            // await artistServices.RunArtistServices();
 
             // var recordServices = new RecordServices();
             // await recordServices.RunRecordServices();
@@ -24,8 +24,8 @@ namespace MusicDBTest
             // var discServices = new DiscServices();
             // await discServices.RunDiscServices();
 
-            // var trackServices = new TrackServices();
-            // await trackServices.RunTrackServices();
+            var trackServices = new TrackServices();
+            await trackServices.RunTrackServices();
         }
     }
 }

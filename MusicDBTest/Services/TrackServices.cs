@@ -23,7 +23,7 @@ namespace MusicDBTest.Services
 
         public async Task RunTrackServices()
         {
-            // await GetAllTracksAsync();
+            await GetAllTracksAsync();
             // await GetAllTracksAsync(true);
             // await GetFullListAsync();
             // await GetArtistListAsync(26);
@@ -36,7 +36,7 @@ namespace MusicDBTest.Services
             // await GetBriefListAsync();
             // await GetBriefListByYearAsync(1974);
             // await GetHighQualityTracksAsync();
-            await GetHighQualityAlbumsAsync();
+            // await GetHighQualityAlbumsAsync();
         }
 
         public async Task GetAllTracksAsync()

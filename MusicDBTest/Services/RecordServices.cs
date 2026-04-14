@@ -56,8 +56,8 @@ namespace MusicDBTest.Services
             // await GetAlbumLengthAsync(306);
             // await GetAlbumDetailsAndLengthAsync(306);
             // await GetNullRecordField();
-            await GetAllRecordFoldersAsync();
-
+            // await GetAllRecordFoldersAsync();
+            await GetTotalDiscNumberAsync();
             // To be added
 
             // To be tested
@@ -66,6 +66,12 @@ namespace MusicDBTest.Services
             // await UpdateRecordAsync();  
             // await UpdateRecord2Async();
             // await DeleteRecordAsync();  
+        }
+
+        public async Task GetTotalDiscNumberAsync()
+        {
+            var discs = await _rr.GetTotalDiscCount();
+            Console.WriteLine($"Total Number of Discs: {discs}");
         }
 
         public async Task GetAllRecordFoldersAsync()

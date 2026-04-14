@@ -36,5 +36,6 @@ namespace MusicDBTest.Services
         Task GetAlbumDetailsAndLengthAsync(int recordId);
         Task GetNullRecordField();
         Task GetAllRecordFoldersAsync();
+        Task GetTotalDiscNumberAsync();
     }
 }

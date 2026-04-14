@@ -469,5 +469,10 @@ namespace MusicDAL.Repository
             return await _db.GetData<Record, dynamic>(sproc, new { });
         }
 
+        public async Task<int> GetTotalDiscCount()
+        {
+            var sproc = "up_GetTotalNumberOfAllRecords";
+            return await _db.GetCountOrId(sproc, new { });
+        }
     }
 }

@@ -35,5 +35,6 @@ namespace MusicDAL.Repository
         Task<Artist> GetArtistFromNameAsync(string name);
         Task<string> GetArtistNameFromRecordAsync(int recordId);
         Task<ArtistRecordDto> GetAlbumDetailsAsync(int recordId);
+        Task<int> GetTotalDiscCount();
     }
 }
